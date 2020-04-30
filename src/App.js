@@ -6,7 +6,7 @@ import {
   Route,
   // Redirect,
 } from "react-router-dom";
-import { Header } from "component";
+import { Header, Footer } from "component";
 import { Home } from "container";
 const App = () => {
   return (
@@ -17,6 +17,7 @@ const App = () => {
           <Route exact path="/" component={Home} />
         </Switch>
       </div>
+      <Footer />
     </Router>
   );
 };

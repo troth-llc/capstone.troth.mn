@@ -1,3 +1,4 @@
 import VideoPlayer from "./video";
 import Header from "./header";
-export { Header, VideoPlayer };
+import Footer from "./footer";
+export { Header, Footer, VideoPlayer };

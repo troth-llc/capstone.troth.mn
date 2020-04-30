@@ -78,8 +78,14 @@ const Home = () => {
             </div>
           </div>
         </div>
+        <div className="hero__offset"></div>
       </div>
-      <div className="hero__offset"></div>
+
+      <div>
+        <div className="container">
+          <h1>Hello world!</h1>
+        </div>
+      </div>
     </>
   );
 };
