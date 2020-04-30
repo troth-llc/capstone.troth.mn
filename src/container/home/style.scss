@@ -1,11 +1,138 @@
 .hero {
-  //   position: relative;
-  .video-js {
+  @media (min-width: 576px) {
+    filter: blur(0);
+    opacity: 1;
+  }
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  filter: blur(10px);
+  opacity: 0.8;
+  .bc-player {
+    position: relative;
+    display: block;
+    overflow: visible;
+    .bc-player__wrapper {
+      padding-bottom: 56.25%;
+    }
+  }
+  #hero-video-player {
     position: absolute;
-    left: 0;
-    top: 56px;
+    left: 50%;
+    top: 50%;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    transform: translate(-50%, -50%);
+    overflow: visible;
+    font-family: inherit;
+    display: block;
+    video {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      width: 100vw;
+      height: auto;
+      transform: translateX(-50%);
+      pointer-events: none;
+      opacity: 1;
+      @media (max-aspect-ratio: 16/9) {
+        width: auto !important;
+        height: 100vh !important;
+      }
+    }
+  }
+}
+#hero {
+  width: 100%;
+  overflow: hidden;
+  @media (min-width: 576px) {
+    position: relative;
+  }
+  &.hp-pane,
+  .hp-pane {
+    height: calc(100vh - 120px);
+    min-height: 500px;
+  }
+  .hero__offset {
+    @media (min-width: 576px) {
+      box-shadow: 0 0 100px 100px black;
+    }
+    position: relative;
+    background: black;
+    z-index: 1;
+    box-shadow: 0 0 30px 30px black;
+  }
+  .hero__card {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+  }
+  .hero__card-content {
+    @media (min-width: 576px) {
+      box-shadow: 0 0 80px 40px rgba(0, 0, 0, 0.65);
+    }
+    position: relative;
+    border-radius: 10px;
+    background: rgba(25, 28, 33, 0.96);
+  }
+  .mc-p-9 {
+    padding: 38px;
+    @media (min-width: 768px) {
+      padding: 43px;
+    }
+    @media (min-width: 960px) {
+      padding: 48px;
+    }
+  }
+  .mc-text-h2 {
+    font-size: 24px;
+    @media (min-width: 768px) {
+      font-size: 28px;
+    }
+    @media (min-width: 960px) {
+      font-size: 32px;
+    }
+  }
+  .mc-mb-4 {
+    margin-bottom: 16px;
+  }
+  .mc-mt-8 {
+    margin-top: 24px;
+    @media (min-width: 768px) {
+      margin-top: 28px;
+    }
+    @media (min-width: 960px) {
+      margin-top: 32px;
+    }
+  }
+  .mc-opacity--muted {
+    opacity: 0.6 !important;
+  }
+  .hero-action {
+    button {
+      color: #fff;
+      font-weight: 700;
+      line-height: 2;
+      letter-spacing: 0.12px;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+  }
+  .btn-link {
+    &:hover,
+    &:focus {
+      outline: none;
+      text-decoration: none;
+      color: #898989;
+    }
+    color: #fff;
+  }
+  .close-hero {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 20px;
   }
 }
