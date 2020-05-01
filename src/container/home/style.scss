@@ -272,3 +272,50 @@
     }
   }
 }
+.mc-mb-6 {
+  margin-bottom: 2rem;
+}
+
+.mc-mt-1 {
+  margin-top: 0.4rem;
+}
+.c-button--secondary {
+  background: #272c33;
+}
+.c-button {
+  padding: 12px 18px;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  line-height: 2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition: background 250ms ease, box-shadow 250ms ease, opacity 250ms ease;
+  vertical-align: middle;
+  border: 0;
+  &:hover,
+  &:focus,
+  &:active {
+    outline: none;
+    background-color: #272c33a4;
+  }
+  label {
+    margin: 0;
+  }
+}
+#cat-select {
+  appearance: none;
+
+  option {
+    background-color: #272c33;
+    &:hover {
+      background: #272c33a4;
+    }
+    outline: none;
+    height: 26px;
+  }
+}

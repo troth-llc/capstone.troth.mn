@@ -17,6 +17,15 @@ const Home = () => {
       },
     ],
   };
+  const [categories, activecategory] = useState([
+    { name: "All", type: "all", active: false },
+    { name: "Most Popular", type: "popular", active: true },
+    { name: "Business Politics", type: "business", active: false },
+    { name: "Music & Entertainment", type: "music", active: false },
+    { name: "Writing", type: "writing", active: false },
+    { name: "Design, Photography, & Fashion", type: "desing", active: false },
+    { name: "Information Technology", type: "it", active: false },
+  ]);
   useEffect(() => {
     window.onscroll = () => {
       var top = document.documentElement.scrollTop;
@@ -85,24 +94,45 @@ const Home = () => {
         <div className="container">
           <h1 className="mc-m-9 text-center mc-text-h2">Explore our courses</h1>
           <ol className="d-none d-md-block class-catalog__nav mc-text-small mc-mt-4 p-0 text-center">
-            <li className="class-catalog__nav-item mc-mb-6">All</li>
-            <li className="class-catalog__nav-item mc-mb-6 class-catalog__nav-item--active">
-              Most Popular
-            </li>
-            <li className="class-catalog__nav-item mc-mb-6">
-              Business, Politics
-            </li>
-            <li className="class-catalog__nav-item mc-mb-6">
-              Music &amp; Entertainment
-            </li>
-            <li className="class-catalog__nav-item mc-mb-6">Writing</li>
-            <li className="class-catalog__nav-item mc-mb-6">
-              Design, Photography, &amp; Fashion
-            </li>
-            <li className="class-catalog__nav-item mc-mb-6">
-              Information Technology
-            </li>
+            {categories.map((category, index) => {
+              return (
+                <li
+                  className={`class-catalog__nav-item mc-mb-6 ${
+                    category.active ? "class-catalog__nav-item--active" : null
+                  }`}
+                  key={index}
+                  onClick={() => {
+                    var selected = categories.map((c) => {
+                      c.active = false;
+                      return c;
+                    });
+                    selected[index].active = true;
+                    activecategory([...selected]);
+                  }}
+                >
+                  {category.name}
+                </li>
+              );
+            })}
           </ol>
+          <div className="d-md-none">
+            <select
+              id="cat-select"
+              className="c-button c-button--full-width c-button--secondary c-button--medium mc-mt-1 mc-mb-6 justify-content-between w-100"
+              defaultValue={categories.find((c) => c.active).type}
+              onChange={(e) => {
+                console.log("fetch data by this filter " + e.target.value);
+              }}
+            >
+              {categories.map((category, index) => {
+                return (
+                  <option value={category.type} key={index}>
+                    {category.name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
           <div className="row sample-course">
             <div className="col-6 col-md-4">
               <Link to="/">
