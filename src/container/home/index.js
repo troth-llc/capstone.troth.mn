@@ -26,6 +26,14 @@ const Home = () => {
     { name: "Design, Photography, & Fashion", type: "desing", active: false },
     { name: "Information Technology", type: "it", active: false },
   ]);
+  const courses = [
+    {
+      name: "test",
+      category: "programming",
+      src:
+        "https://www.masterclass.com/course-images/images/11317/original/1587431995-RF_primary_16x9.jpg?width=320",
+    },
+  ];
   useEffect(() => {
     window.onscroll = () => {
       var top = document.documentElement.scrollTop;
@@ -134,29 +142,35 @@ const Home = () => {
             </select>
           </div>
           <div className="row sample-course">
-            <div className="col-6 col-md-4">
-              <Link to="/">
-                <div className="mc-tile mc-tile--16x9">
-                  <div className="mc-tile__content content">
-                    <div className="mc-tile__component mc-tile-image">
-                      <div className="mc-tile-image__image mc-background mc-background--loaded mc-background--fit-container mc-background--position-x-center mc-background--position-y-center mc-background--size-cover">
-                        <div className="mc-background__background-container">
-                          <img
-                            src="https://www.masterclass.com/course-images/images/11317/original/1587431995-RF_primary_16x9.jpg?width=320&amp;dpr=2"
-                            className="mc-background__background"
-                            alt="name"
-                          />
+            {courses.map((course, index) => {
+              return (
+                <div className="col-6 col-md-4" key={index}>
+                  <Link to="/">
+                    <div className="mc-tile mc-tile--16x9">
+                      <div className="mc-tile__content content">
+                        <div className="mc-tile__component mc-tile-image">
+                          <div className="mc-tile-image__image mc-background mc-background--loaded mc-background--fit-container mc-background--position-x-center mc-background--position-y-center mc-background--size-cover">
+                            <div className="mc-background__background-container">
+                              <img
+                                src={course.src}
+                                className="mc-background__background"
+                                alt="name"
+                              />
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                    <h6 className="mc-text-h6 mc-mt-2 mc-mb-1">
+                      {course.name}
+                    </h6>
+                    <p className="mc-text-small mc-opacity--muted">
+                      {course.category}
+                    </p>
+                  </Link>
                 </div>
-                <h6 className="mc-text-h6 mc-mt-2 mc-mb-1">Ron Finley</h6>
-                <p className="mc-text-small mc-opacity--muted">
-                  Teaches Gardening
-                </p>
-              </Link>
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>
