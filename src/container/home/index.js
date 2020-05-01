@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { VideoPlayer } from "component";
 import { Button } from "reactstrap";
 import "./style.scss";
+import { Link } from "react-router-dom";
 const Home = () => {
   const [scroll, setScroll] = useState({ opacity: 1, transform: 1 });
   const [play, setPlay] = useState(false);
@@ -78,12 +79,55 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="hero__offset"></div>
+        <div className={`hero__offset ${play ? "d-none" : null}`}></div>
       </div>
-
       <div>
         <div className="container">
-          <h1>Hello world!</h1>
+          <h1 className="mc-m-9 text-center mc-text-h2">Explore our courses</h1>
+          <ol className="d-none d-md-block class-catalog__nav mc-text-small mc-mt-4 p-0 text-center">
+            <li className="class-catalog__nav-item mc-mb-6">All</li>
+            <li className="class-catalog__nav-item mc-mb-6 class-catalog__nav-item--active">
+              Most Popular
+            </li>
+            <li className="class-catalog__nav-item mc-mb-6">
+              Business, Politics
+            </li>
+            <li className="class-catalog__nav-item mc-mb-6">
+              Music &amp; Entertainment
+            </li>
+            <li className="class-catalog__nav-item mc-mb-6">Writing</li>
+            <li className="class-catalog__nav-item mc-mb-6">
+              Design, Photography, &amp; Fashion
+            </li>
+            <li className="class-catalog__nav-item mc-mb-6">
+              Information Technology
+            </li>
+          </ol>
+          <div className="row sample-course">
+            <div className="col-6 col-md-4">
+              <Link to="/">
+                <div className="mc-tile mc-tile--16x9">
+                  <div className="mc-tile__content content">
+                    <div className="mc-tile__component mc-tile-image">
+                      <div className="mc-tile-image__image mc-background mc-background--loaded mc-background--fit-container mc-background--position-x-center mc-background--position-y-center mc-background--size-cover">
+                        <div className="mc-background__background-container">
+                          <img
+                            src="https://www.masterclass.com/course-images/images/11317/original/1587431995-RF_primary_16x9.jpg?width=320&amp;dpr=2"
+                            className="mc-background__background"
+                            alt="name"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <h6 className="mc-text-h6 mc-mt-2 mc-mb-1">Ron Finley</h6>
+                <p className="mc-text-small mc-opacity--muted">
+                  Teaches Gardening
+                </p>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </>

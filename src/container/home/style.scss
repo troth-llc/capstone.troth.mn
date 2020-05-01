@@ -139,3 +139,136 @@
     }
   }
 }
+.mc-m-9 {
+  margin: 38px 0;
+}
+.mc-text-h2 {
+  font-size: 24px;
+  @media (min-width: 768px) {
+    font-size: 28px;
+  }
+  @media (min-width: 960px) {
+    font-size: 32px;
+  }
+}
+.mc-mt-4 {
+  margin-top: 16px;
+}
+.mc-text-small {
+  font-size: 14px;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+}
+.class-catalog__nav-item {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  opacity: 0.5;
+  margin-right: 2rem;
+  padding-bottom: 0.4rem;
+  transition: opacity 0.4s ease;
+  &.class-catalog__nav-item--active,
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+}
+// course sample
+.mc-tile {
+  position: relative;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+.mc-tile--16x9:before,
+.mc-tile--widescreen-video:before {
+  display: block;
+  width: 100%;
+  padding-top: 56.25%;
+  content: "";
+}
+.mc-tile__content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.mc-tile__component {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.mc-tile-image__image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+}
+.mc-background.mc-background--position-y-center
+  .mc-background__background-container,
+.mc-background.mc-background--position-y-center
+  .mc-background__content-container {
+  align-items: center;
+}
+
+.mc-background.mc-background--position-x-center
+  .mc-background__background-container,
+.mc-background.mc-background--position-x-center
+  .mc-background__content-container {
+  justify-content: center;
+}
+.mc-background--fit-container .mc-background__background-container,
+.mc-background--fit-content .mc-background__background-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.mc-background--loaded .mc-background__background-container {
+  visibility: visible;
+}
+.mc-background__background-container {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  overflow: hidden;
+}
+
+.mc-background--size-cover .mc-background__background {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+.mc-mb-1 {
+  margin-bottom: 0.4rem;
+}
+.mc-mt-2 {
+  margin-top: 0.8rem;
+}
+.mc-opacity--muted {
+  opacity: 0.6 !important;
+}
+.sample-course {
+  a {
+    color: unset;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
