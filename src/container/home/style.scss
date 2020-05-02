@@ -10,39 +10,38 @@
   height: 100vh;
   filter: blur(10px);
   opacity: 0.8;
-  .bc-player {
-    position: relative;
-    display: block;
-    overflow: visible;
-    .bc-player__wrapper {
-      padding-bottom: 56.25%;
-    }
-  }
-  #hero-video-player {
-    position: absolute;
+  video {
+    position: fixed;
+    top: 0;
     left: 50%;
-    top: 50%;
-    width: 100%;
-    height: 100%;
-    transform: translate(-50%, -50%);
-    overflow: visible;
-    font-family: inherit;
-    display: block;
-    video {
-      position: fixed;
-      top: 0;
-      left: 50%;
-      width: 100vw;
-      height: auto;
-      transform: translateX(-50%);
-      pointer-events: none;
-      opacity: 1;
-      @media (max-aspect-ratio: 16/9) {
-        width: auto !important;
-        height: 100vh !important;
-      }
+    width: 100vw;
+    height: auto;
+    pointer-events: none;
+    opacity: 1;
+    @media (max-aspect-ratio: 16/9) {
+      width: auto !important;
+      height: 100vh !important;
     }
   }
+}
+.bc-player {
+  position: relative;
+  display: block;
+  overflow: visible;
+  .bc-player__wrapper {
+    padding-bottom: 56.25%;
+  }
+}
+.video-js {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  overflow: visible;
+  font-family: inherit;
+  display: block;
 }
 #hero {
   width: 100%;
@@ -317,5 +316,57 @@
     }
     outline: none;
     height: 26px;
+  }
+}
+// category show case
+.category-showcase-container {
+  position: relative;
+  border-radius: 0.25em;
+  background: rgba(255, 255, 255, 0.02);
+}
+.category-trigger {
+  h6 {
+    font-size: 15px;
+    span.material-icons {
+      height: 27px;
+      vertical-align: middle;
+      margin-right: 15px;
+    }
+  }
+  .d-flex {
+    height: 20px;
+  }
+  &.active,
+  &:hover {
+    background: rgba(255, 255, 255, 0.02);
+  }
+  &:not(:last-child) {
+    border-bottom: 1px solid #272c33;
+  }
+  cursor: pointer;
+  transition: background 0.25s ease;
+  padding: 20px;
+  @media (min-width: 960px) {
+    padding: 24px;
+  }
+
+  @media (min-width: 768px) {
+    padding: 22px;
+  }
+}
+.vjs-tech {
+  width: 100%;
+  left: unset !important;
+}
+.category-showcase-container {
+  .col-lg-auto {
+    @media (max-width: 992px) {
+      padding-left: 15px !important;
+    }
+  }
+  .col {
+    @media (min-width: 992px) {
+      padding-right: 0 !important;
+    }
   }
 }

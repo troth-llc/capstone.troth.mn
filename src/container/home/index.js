@@ -17,6 +17,28 @@ const Home = () => {
       },
     ],
   };
+  const [overviews, activeoverview] = useState([
+    {
+      name: "Overview",
+      active: true,
+      time: "1:00",
+      video: {
+        autoplay: false,
+        controls: true,
+        sources: [
+          {
+            src: require("assets/video/hero.mp4"),
+            type: "video/mp4",
+          },
+        ],
+        poster:
+          "https://cf-images.us-east-1.prod.boltdns.net/v1/jit/5344802162001/be97f99b-ea1d-40fb-aaf0-4c66555a9884/main/1920x1080/30s154ms/match/image.jpg",
+      },
+    },
+    { name: "Business", video: "", active: false, time: "1:12" },
+    { name: "Programing", video: "", active: false, time: "1:40" },
+    { name: "Design", video: "", active: false, time: "0:43" },
+  ]);
   const [categories, activecategory] = useState([
     { name: "All", type: "all", active: false },
     { name: "Most Popular", type: "popular", active: true },
@@ -63,7 +85,7 @@ const Home = () => {
                     className="material-icons btn btn-link close-hero"
                     onClick={() => {
                       document.getElementById(
-                        "hero-video-player_html5_api"
+                        "hero-player_html5_api"
                       ).muted = false;
                       setPlay(true);
                     }}
@@ -91,7 +113,7 @@ const Home = () => {
           <div className="hero">
             <div className="bc-player">
               <div className="bc-player__wrapper">
-                <VideoPlayer {...hero} />
+                <VideoPlayer {...hero} id="hero-player" />
               </div>
             </div>
           </div>
@@ -171,6 +193,57 @@ const Home = () => {
                 </div>
               );
             })}
+          </div>
+        </div>
+        <div className="container mb-5">
+          <div className="text-center">
+            <h1 className="mc-m-9 mc-text-h2 mb-0">Our categories</h1>
+            <p className="mc-opacity--muted mb-4">
+              (Explained in under 100 seconds)
+            </p>
+          </div>
+          <div className="category-showcase-container">
+            <div className="row">
+              <div className="col">
+                <div className="p-3">
+                  <div className="bc-player">
+                    <div className="bc-player__wrapper">
+                      <VideoPlayer {...overviews.find((o) => o.active).video} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-12 col-lg-auto pl-0">
+                {overviews.map((overview, index) => {
+                  return (
+                    <div
+                      className={`category-trigger${
+                        overview.active ? " active" : ""
+                      }`}
+                      key={index}
+                      onClick={() => {
+                        var selected = overviews.map((o) => {
+                          o.active = false;
+                          return o;
+                        });
+                        selected[index].active = true;
+                        activeoverview([...selected]);
+                      }}
+                    >
+                      <div className="d-flex justify-content-between align-items-center">
+                        <h6 className="mb-0 mr-5">
+                          <span className="material-icons">play_arrow</span>
+                          {overview.name}
+                        </h6>
+                        <p className="mc-opacity--muted mc-text-small mb-0">
+                          {overview.time}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </div>

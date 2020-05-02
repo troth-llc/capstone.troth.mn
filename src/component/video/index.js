@@ -3,7 +3,7 @@ import videojs from "video.js";
 import "./style.scss";
 export default class VideoPlayer extends React.Component {
   componentDidMount() {
-    this.player = videojs("hero-video-player", this.props);
+    this.player = videojs(this.videoNode, this.props);
   }
   componentWillUnmount() {
     if (this.player) {
@@ -13,7 +13,10 @@ export default class VideoPlayer extends React.Component {
   render() {
     return (
       <div data-vjs-player>
-        <video id="hero-video-player"></video>
+        <video
+          ref={(node) => (this.videoNode = node)}
+          className="video-js"
+        ></video>
       </div>
     );
   }
