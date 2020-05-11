@@ -1,15 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const course = require("../controllers/course");
+const category = require("../controllers/category");
 // middleware
 const token = require("../middleware/token");
 const validate = require("../middleware/validator");
 /**
- * /api/course:
+ * /api/category:
  *   post:
  *     description:
  *     responses:
  *       200:
  */
-router.get("/", course.index);
+router.get("/", category.index);
 module.exports = router;

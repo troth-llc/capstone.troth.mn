@@ -6,4 +6,5 @@ router.get("/", function (req, res) {
 });
 router.use("/course", require("./course.js"));
 router.use("/episode", require("./episode"));
+router.use("/category", require("./category"));
 module.exports = router;

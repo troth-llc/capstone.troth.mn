@@ -3,6 +3,7 @@ import { VideoPlayer } from "component";
 import { Button } from "reactstrap";
 import "./style.scss";
 import { Link } from "react-router-dom";
+import axios from "axios";
 const Home = () => {
   const [scroll, setScroll] = useState({ opacity: 1, transform: 1 });
   const [play, setPlay] = useState(false);
@@ -39,15 +40,7 @@ const Home = () => {
     { name: "Programing", video: "", active: false, time: "1:40" },
     { name: "Design", video: "", active: false, time: "0:43" },
   ]);
-  const [categories, activecategory] = useState([
-    { name: "All", type: "all", active: false },
-    { name: "Most Popular", type: "popular", active: true },
-    { name: "Business Politics", type: "business", active: false },
-    { name: "Music & Entertainment", type: "music", active: false },
-    { name: "Writing", type: "writing", active: false },
-    { name: "Design, Photography, & Fashion", type: "desing", active: false },
-    { name: "Information Technology", type: "it", active: false },
-  ]);
+  const [course, setCourse] = useState(null);
   const courses = [
     {
       name: "test",
@@ -56,12 +49,24 @@ const Home = () => {
         "https://www.masterclass.com/course-images/images/11317/original/1587431995-RF_primary_16x9.jpg?width=320",
     },
   ];
+  const get = () => {
+    axios.get("/api/course").then((res) => {
+      var set = res.data.result.map((result, index) => {
+        return { ...result, active: index === 0 ? true : false };
+      });
+      setCourse(set);
+    });
+  };
+  useEffect(() => {
+    get();
+  }, []);
   useEffect(() => {
     window.onscroll = () => {
       var top = document.documentElement.scrollTop;
       setScroll({ opacity: 1 - top / 1000, transform: 1 - top / 8000 });
     };
   }, [scroll, hero]);
+  useEffect(() => {}, [course]);
   return (
     <>
       <div
@@ -123,77 +128,94 @@ const Home = () => {
       <div>
         <div className="container">
           <h1 className="mc-m-9 text-center mc-text-h2">Explore our courses</h1>
-          <ol className="d-none d-md-block class-catalog__nav mc-text-small mc-mt-4 p-0 text-center">
-            {categories.map((category, index) => {
-              return (
-                <li
-                  className={`class-catalog__nav-item mc-mb-6 ${
-                    category.active ? "class-catalog__nav-item--active" : null
-                  }`}
-                  key={index}
-                  onClick={() => {
-                    var selected = categories.map((c) => {
+          {course ? (
+            <>
+              <ol className="d-none d-md-block class-catalog__nav mc-text-small mc-mt-4 p-0 text-center">
+                {course.map((c, index) => {
+                  return (
+                    <li
+                      className={`class-catalog__nav-item mc-mb-6 ${
+                        c.active ? "class-catalog__nav-item--active" : null
+                      }`}
+                      key={c._id}
+                      onClick={() => {
+                        var selected = course.map((c) => {
+                          c.active = false;
+                          return c;
+                        });
+                        selected[index].active = true;
+                        setCourse([...selected]);
+                      }}
+                    >
+                      {c.name}
+                    </li>
+                  );
+                })}
+              </ol>
+              <div className="d-md-none">
+                <select
+                  id="cat-select"
+                  className="c-button c-button--full-width c-button--secondary c-button--medium mc-mt-1 mc-mb-6 justify-content-between w-100"
+                  value={course.find((c) => c.active)._id}
+                  onChange={(e) => {
+                    var selected = course.map((c) => {
                       c.active = false;
                       return c;
                     });
-                    selected[index].active = true;
-                    activecategory([...selected]);
+                    course.find((c) => c._id === e.target.value).active = true;
+                    setCourse([...selected]);
                   }}
                 >
-                  {category.name}
-                </li>
-              );
-            })}
-          </ol>
-          <div className="d-md-none">
-            <select
-              id="cat-select"
-              className="c-button c-button--full-width c-button--secondary c-button--medium mc-mt-1 mc-mb-6 justify-content-between w-100"
-              defaultValue={categories.find((c) => c.active).type}
-              onChange={(e) => {
-                console.log("fetch data by this filter " + e.target.value);
-              }}
-            >
-              {categories.map((category, index) => {
-                return (
-                  <option value={category.type} key={index}>
-                    {category.name}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-          <div className="row sample-course">
-            {courses.map((course, index) => {
-              return (
-                <div className="col-6 col-md-4" key={index}>
-                  <Link to="/">
-                    <div className="mc-tile mc-tile--16x9">
-                      <div className="mc-tile__content content">
-                        <div className="mc-tile__component mc-tile-image">
-                          <div className="mc-tile-image__image mc-background mc-background--loaded mc-background--fit-container mc-background--position-x-center mc-background--position-y-center mc-background--size-cover">
-                            <div className="mc-background__background-container">
-                              <img
-                                src={course.src}
-                                className="mc-background__background"
-                                alt="name"
-                              />
+                  {course.map((c) => {
+                    return (
+                      <option value={c._id} key={c._id}>
+                        {c.name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
+              <div className="row sample-course">
+                {course
+                  .find((c) => c.active)
+                  .episode.map((episode) => {
+                    return (
+                      <div className="col-6 col-md-4" key={episode._id}>
+                        <Link
+                          to={`/course/${
+                            course.find((c) => c.active)._id
+                          }/episode/${episode._id}`}
+                        >
+                          <div className="mc-tile mc-tile--16x9">
+                            <div className="mc-tile__content content">
+                              <div className="mc-tile__component mc-tile-image">
+                                <div className="mc-tile-image__image mc-background mc-background--loaded mc-background--fit-container mc-background--position-x-center mc-background--position-y-center mc-background--size-cover">
+                                  <div className="mc-background__background-container">
+                                    <img
+                                      src={episode.cover}
+                                      className="mc-background__background"
+                                      alt="name"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
-                        </div>
+                          <h6 className="mc-text-h6 mc-mt-2 mc-mb-1">
+                            {episode.name}
+                          </h6>
+                          <p className="mc-text-small mc-opacity--muted">
+                            {episode.description}
+                          </p>
+                        </Link>
                       </div>
-                    </div>
-                    <h6 className="mc-text-h6 mc-mt-2 mc-mb-1">
-                      {course.name}
-                    </h6>
-                    <p className="mc-text-small mc-opacity--muted">
-                      {course.category}
-                    </p>
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
+                    );
+                  })}
+              </div>
+            </>
+          ) : (
+            <p className="text-center">Loading...</p>
+          )}
         </div>
         <div className="container mb-5">
           <div className="text-center">

@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "front": "npm start --prefix front",
+    "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
