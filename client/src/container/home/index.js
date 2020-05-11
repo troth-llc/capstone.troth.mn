@@ -213,7 +213,7 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-12 col-lg-auto pl-0">
+              <div className="col-12 col-lg-auto pl-0 ml-clear">
                 {overviews.map((overview, index) => {
                   return (
                     <div

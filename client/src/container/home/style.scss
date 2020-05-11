@@ -370,3 +370,9 @@
     }
   }
 }
+.ml-clear {
+  @media (min-width: 992px) {
+    margin-top: 15px;
+    margin-left: -15px;
+  }
+}
