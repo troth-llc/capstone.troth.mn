@@ -7,7 +7,7 @@ import {
   // Redirect,
 } from "react-router-dom";
 import { Header, Footer } from "component";
-import { Home } from "container";
+import { Home, Course, Find } from "container";
 const App = () => {
   return (
     <Router>
@@ -15,6 +15,8 @@ const App = () => {
       <div className="app">
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/course" component={Course} />
+          <Route path="/course/:id/:episode" component={Find} />
         </Switch>
       </div>
       <Footer />

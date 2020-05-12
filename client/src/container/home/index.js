@@ -41,14 +41,6 @@ const Home = () => {
     { name: "Design", video: "", active: false, time: "0:43" },
   ]);
   const [course, setCourse] = useState(null);
-  const courses = [
-    {
-      name: "test",
-      category: "programming",
-      src:
-        "https://www.masterclass.com/course-images/images/11317/original/1587431995-RF_primary_16x9.jpg?width=320",
-    },
-  ];
   const get = () => {
     axios.get("/api/course").then((res) => {
       var set = res.data.result.map((result, index) => {
@@ -109,7 +101,9 @@ const Home = () => {
                     </p>
                   </div>
                   <div className="hero-action pt-3">
-                    <Button color="danger">Become a member</Button>
+                    <Button color="danger" className="member-button">
+                      Become a member
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -198,6 +192,9 @@ const Home = () => {
                                     />
                                   </div>
                                 </div>
+                                <p className="episode-duration">
+                                  {episode.duration}
+                                </p>
                               </div>
                             </div>
                           </div>
