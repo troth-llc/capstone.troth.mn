@@ -32,7 +32,7 @@ const Course = () => {
                           </div>
                         </div>
                         <p className="episode-duration">
-                          {course.episode.length} eposide
+                          {course.episode.length} episode
                         </p>
                       </div>
                     </div>

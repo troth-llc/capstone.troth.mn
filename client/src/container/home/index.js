@@ -176,9 +176,9 @@ const Home = () => {
                     return (
                       <div className="col-6 col-md-4" key={episode._id}>
                         <Link
-                          to={`/course/${
-                            course.find((c) => c.active)._id
-                          }/episode/${episode._id}`}
+                          to={`/course/${course.find((c) => c.active)._id}/${
+                            episode._id
+                          }`}
                         >
                           <div className="mc-tile mc-tile--16x9">
                             <div className="mc-tile__content content">

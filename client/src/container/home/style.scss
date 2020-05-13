@@ -378,10 +378,11 @@
   letter-spacing: 0.5px;
   font-size: 12px;
   font-weight: 500;
-  line-height: 11px;
+  line-height: 12px;
   flex-direction: row;
   align-items: center;
   display: inline-flex;
+  vertical-align: middle;
 }
 .member-button {
   color: #fff;
