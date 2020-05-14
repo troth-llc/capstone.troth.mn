@@ -21,7 +21,6 @@ exports.index = (req, res) => {
 };
 exports.find = (req, res) => {
   const { id, episode } = req.params;
-  console.log(episode);
   if (id && episode) {
     Course.findById(id)
       .select("name episode cover")

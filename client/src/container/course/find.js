@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Collapse } from "reactstrap";
 const Find = (props) => {
   const [state, setState] = useState(null);
   const [episode, setEpisode] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => setIsOpen(!isOpen);
   const get = () => {
     axios
       .get(`/api/course/${props.match.params.id}/${props.match.params.episode}`)
@@ -58,15 +62,23 @@ const Find = (props) => {
                 </div>
               </div>
             </div>
-            <div className="col-12 col-lg-auto pl-0 ml-clear">
-              <div className="pl-3 pr-3 col-12 d-block d-md-none description">
-                <span
+            <div className="col-12 col-lg-auto pl-0 ml-clear episode-list">
+              <div className="col-12 d-block d-lg-none p-0 pb-3">
+                <div className="description" onClick={toggle}>
+                  <span>Description</span>
+                  <span className="material-icons">
+                    {isOpen ? "arrow_drop_up" : "arrow_drop_down"}
+                  </span>
+                </div>
+                <Collapse
+                  isOpen={isOpen}
+                  className="pr-3 pl-3 fs-13 pt-2"
                   dangerouslySetInnerHTML={{
                     __html: `${linkify(
                       episode.description.replace(/\n|\r\n|\r/g, "<br>")
                     )}`,
                   }}
-                ></span>
+                />
               </div>
               {state.episode.map((episode, index) => {
                 return (
@@ -97,7 +109,7 @@ const Find = (props) => {
               })}
             </div>
           </div>
-          <div className="pl-3 pr-3 col-12 d-none d-lg-block description">
+          <div className="pl-3 pr-3 col-12 d-none d-lg-block fs-13">
             <span
               dangerouslySetInnerHTML={{
                 __html: `${linkify(

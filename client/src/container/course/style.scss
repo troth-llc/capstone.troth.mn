@@ -50,5 +50,23 @@
   }
 }
 .description {
+  margin: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  padding: 10px 0;
+  padding-left: 5px;
+  &:hover,
+  &:focus {
+    background: rgba(0, 0, 0, 0.1);
+  }
+}
+.fs-13 {
   font-size: 13px;
+}
+.episode-list {
+  max-height: 420px;
+  overflow-x: auto;
 }
