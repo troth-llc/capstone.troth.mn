@@ -39,3 +39,18 @@ exports.find = (req, res) => {
       });
   } else return res.json({ status: false });
 };
+exports.introduction = (req, res) => {
+  Course.find()
+    .select("name episode")
+    .populate({
+      path: "episode",
+      select: "name cover duration video",
+      options: {
+        limit: 1,
+      },
+    })
+    .exec((err, result) => {
+      if (err) console.log(err);
+      res.json({ result });
+    });
+};

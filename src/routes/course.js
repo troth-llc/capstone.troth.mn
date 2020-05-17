@@ -13,4 +13,5 @@ const validate = require("../middleware/validator");
  */
 router.get("/", course.index);
 router.get("/:id/:episode", course.find);
+router.get("/intro", course.introduction);
 module.exports = router;

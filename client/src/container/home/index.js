@@ -7,6 +7,12 @@ import axios from "axios";
 const Home = () => {
   const [scroll, setScroll] = useState({ opacity: 1, transform: 1 });
   const [play, setPlay] = useState(false);
+  const isYoutube = (url) => {
+    var match = url.match(
+      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/
+    );
+    return match && match[2].length == 11 ? match[2] : false;
+  };
   const hero = {
     autoplay: true,
     muted: true,
@@ -18,35 +24,27 @@ const Home = () => {
       },
     ],
   };
-  const [overviews, activeoverview] = useState([
-    {
-      name: "Overview",
-      active: true,
-      time: "1:00",
-      video: {
-        autoplay: false,
-        controls: true,
-        sources: [
-          {
-            src: require("assets/video/hero.mp4"),
-            type: "video/mp4",
-          },
-        ],
-        poster:
-          "https://cf-images.us-east-1.prod.boltdns.net/v1/jit/5344802162001/be97f99b-ea1d-40fb-aaf0-4c66555a9884/main/1920x1080/30s154ms/match/image.jpg",
-      },
-    },
-    { name: "Business", video: "", active: false, time: "1:12" },
-    { name: "Programing", video: "", active: false, time: "1:40" },
-    { name: "Design", video: "", active: false, time: "0:43" },
-  ]);
   const [course, setCourse] = useState(null);
+  const [intro, setIntro] = useState(null);
   const get = () => {
     axios.get("/api/course").then((res) => {
       var set = res.data.result.map((result, index) => {
         return { ...result, active: index === 0 ? true : false };
       });
       setCourse(set);
+    });
+    axios.get("/api/course/intro").then((res) => {
+      var set = res.data.result.map((result, index) => {
+        return {
+          name: result.name,
+          duration: result.episode.length
+            ? result.episode[0].duration
+            : "00:00",
+          video: result.episode.length ? result.episode[0].video : false,
+          active: index === 0 ? true : false,
+        };
+      });
+      setIntro(set);
     });
   };
   useEffect(() => {
@@ -58,7 +56,7 @@ const Home = () => {
       setScroll({ opacity: 1 - top / 1000, transform: 1 - top / 8000 });
     };
   }, [scroll, hero]);
-  useEffect(() => {}, [course]);
+  useEffect(() => {}, [course, intro]);
   return (
     <>
       <div
@@ -216,9 +214,9 @@ const Home = () => {
         </div>
         <div className="container mb-5">
           <div className="text-center">
-            <h1 className="mc-m-9 mc-text-h2 mb-0">Our categories</h1>
+            <h1 className="mc-m-9 mc-text-h2 mb-0">Course Introductions</h1>
             <p className="mc-opacity--muted mb-4">
-              (Explained in under 100 seconds)
+              (Explained in under 5 minutes)
             </p>
           </div>
           <div className="category-showcase-container">
@@ -227,40 +225,66 @@ const Home = () => {
                 <div className="p-3">
                   <div className="bc-player">
                     <div className="bc-player__wrapper">
-                      <VideoPlayer {...overviews.find((o) => o.active).video} />
+                      {intro ? (
+                        isYoutube(intro.find((i) => i.active).video) ? (
+                          <div className="player-full">
+                            <iframe
+                              src={intro.find((i) => i.active).video}
+                              frameBorder="0"
+                              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                              allowFullScreen
+                              title="youtube player"
+                            ></iframe>
+                          </div>
+                        ) : (
+                          <div className="player-full">
+                            <iframe
+                              src={intro.find((i) => i.active).video}
+                              title="vimeo"
+                              frameBorder="0"
+                              allow="autoplay; fullscreen"
+                              allowFullScreen
+                            ></iframe>
+                          </div>
+                        )
+                      ) : null}
                     </div>
                   </div>
                 </div>
               </div>
               <div className="col-12 col-lg-auto pl-0 ml-clear">
-                {overviews.map((overview, index) => {
-                  return (
-                    <div
-                      className={`category-trigger${
-                        overview.active ? " active" : ""
-                      }`}
-                      key={index}
-                      onClick={() => {
-                        var selected = overviews.map((o) => {
-                          o.active = false;
-                          return o;
-                        });
-                        selected[index].active = true;
-                        activeoverview([...selected]);
-                      }}
-                    >
-                      <div className="d-flex justify-content-between align-items-center">
-                        <h6 className="mb-0 mr-5">
-                          <span className="material-icons">play_arrow</span>
-                          {overview.name}
-                        </h6>
-                        <p className="mc-opacity--muted mc-text-small mb-0">
-                          {overview.time}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
+                {intro
+                  ? intro.map((int, index) => {
+                      return (
+                        <div
+                          className={`category-trigger${
+                            int.active ? " active" : ""
+                          }`}
+                          key={index}
+                          onClick={() => {
+                            var selected = intro.map((c) => {
+                              c.active = false;
+                              return c;
+                            });
+                            selected[index].active = true;
+                            setIntro([...selected]);
+                          }}
+                        >
+                          <div className="d-flex justify-content-between align-items-center">
+                            <h6 className="mb-0 mr-5">
+                              <span className="material-icons">
+                                {int.active ? "pause" : "play_arrow"}
+                              </span>
+                              {int.name}
+                            </h6>
+                            <p className="mc-opacity--muted mc-text-small mb-0">
+                              {int.duration}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })
+                  : null}
               </div>
             </div>
           </div>

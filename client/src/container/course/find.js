@@ -17,10 +17,10 @@ const Find = (props) => {
       });
   };
   const isYoutube = (url) => {
-    if (url.length > 10) {
-      url = url.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
-      return url[2] !== undefined ? url[2].split(/[^0-9a-z_\-]/i)[0] : false;
-    } else return false;
+    var match = url.match(
+      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/
+    );
+    return match && match[2].length == 11 ? match[2] : false;
   };
   const linkify = (text) => {
     var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
@@ -33,7 +33,7 @@ const Find = (props) => {
     <div className="course container">
       {state && episode ? (
         <>
-          <h5 className="pt-4 pb-3 mb-0 pl-3">{episode.name}</h5>
+          <h5 className="pt-4 pb-3 mb-0 pl-3">{state.name}</h5>
           <div className="row">
             <div className="col">
               <div className="p-3">
@@ -46,12 +46,14 @@ const Find = (props) => {
                           frameBorder="0"
                           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                           allowFullScreen
+                          title="youtube player"
                         ></iframe>
                       </div>
                     ) : (
                       <div className="player-full">
                         <iframe
                           src={episode.video}
+                          title="vimeo"
                           frameBorder="0"
                           allow="autoplay; fullscreen"
                           allowFullScreen
@@ -64,6 +66,7 @@ const Find = (props) => {
             </div>
             <div className="col-12 col-lg-auto pl-0 ml-clear episode-list">
               <div className="col-12 d-block d-lg-none p-0 pb-3">
+                <h6 className="pl-3 pr-3 pb-2">{episode.name}</h6>
                 <div className="description" onClick={toggle}>
                   <span>Description</span>
                   <span className="material-icons">
@@ -110,6 +113,7 @@ const Find = (props) => {
             </div>
           </div>
           <div className="pl-3 pr-3 col-12 d-none d-lg-block fs-13">
+            <h6 className="pb-2">{episode.name}</h6>
             <span
               dangerouslySetInnerHTML={{
                 __html: `${linkify(
