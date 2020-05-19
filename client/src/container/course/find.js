@@ -39,7 +39,18 @@ const Find = (props) => {
               <div className="p-3">
                 <div className="bc-player">
                   <div className="bc-player__wrapper">
-                    {isYoutube(episode.video) ? (
+                    {episode.msg ? (
+                      <div className="premium-video">
+                        <a
+                          className="btn btn-danger member-button"
+                          href="https://troth.mn/capstone/premium"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Become a member
+                        </a>
+                      </div>
+                    ) : isYoutube(episode.video) ? (
                       <div className="player-full">
                         <iframe
                           src={episode.video}
@@ -66,22 +77,27 @@ const Find = (props) => {
             </div>
             <div className="col-12 col-lg-auto pl-0 ml-clear episode-list">
               <div className="col-12 d-block d-lg-none p-0 pb-3">
-                <h6 className="pl-3 pr-3 pb-2">{episode.name}</h6>
-                <div className="description" onClick={toggle}>
-                  <span>Description</span>
-                  <span className="material-icons">
-                    {isOpen ? "arrow_drop_up" : "arrow_drop_down"}
-                  </span>
-                </div>
-                <Collapse
-                  isOpen={isOpen}
-                  className="pr-3 pl-3 fs-13 pt-2"
-                  dangerouslySetInnerHTML={{
-                    __html: `${linkify(
-                      episode.description.replace(/\n|\r\n|\r/g, "<br>")
-                    )}`,
-                  }}
-                />
+                {episode.msg ? null : (
+                  <>
+                    <h6 className="pl-3 pr-3 pb-2">{episode.name}</h6>
+                    <div className="description" onClick={toggle}>
+                      <span>Description</span>
+                      <span className="material-icons">
+                        {isOpen ? "arrow_drop_up" : "arrow_drop_down"}
+                      </span>
+                    </div>
+
+                    <Collapse
+                      isOpen={isOpen}
+                      className="pr-3 pl-3 fs-13 pt-2"
+                      dangerouslySetInnerHTML={{
+                        __html: `${linkify(
+                          episode.description.replace(/\n|\r\n|\r/g, "<br>")
+                        )}`,
+                      }}
+                    />
+                  </>
+                )}
               </div>
               {state.episode.map((episode, index) => {
                 return (
@@ -113,14 +129,18 @@ const Find = (props) => {
             </div>
           </div>
           <div className="pl-3 pr-3 col-12 d-none d-lg-block fs-13">
-            <h6 className="pb-2">{episode.name}</h6>
-            <span
-              dangerouslySetInnerHTML={{
-                __html: `${linkify(
-                  episode.description.replace(/\n|\r\n|\r/g, "<br>")
-                )}`,
-              }}
-            ></span>
+            {episode.msg ? null : (
+              <>
+                <h6 className="pb-2">{episode.name}</h6>
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: `${linkify(
+                      episode.description.replace(/\n|\r\n|\r/g, "<br>")
+                    )}`,
+                  }}
+                ></span>
+              </>
+            )}
           </div>
         </>
       ) : (
