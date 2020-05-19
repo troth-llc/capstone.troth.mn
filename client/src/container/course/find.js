@@ -1,13 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Collapse } from "reactstrap";
+import {
+  Collapse,
+  Modal,
+  FormGroup,
+  Label,
+  Input,
+  Button,
+  ModalHeader,
+  FormFeedback,
+} from "reactstrap";
 const Find = (props) => {
   const [state, setState] = useState(null);
   const [episode, setEpisode] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-
+  const [modal, setModal] = useState(false);
+  const [submission, setSubmission] = useState({});
+  const submissionFile = useRef(null);
+  const [disabled, disable] = useState(false);
+  const [error, setError] = useState({});
   const toggle = () => setIsOpen(!isOpen);
+  const toggle_modal = () => setModal(!modal);
   const get = () => {
     axios
       .get(`/api/course/${props.match.params.id}/${props.match.params.episode}`)
@@ -86,7 +100,6 @@ const Find = (props) => {
                         {isOpen ? "arrow_drop_up" : "arrow_drop_down"}
                       </span>
                     </div>
-
                     <Collapse
                       isOpen={isOpen}
                       className="pr-3 pl-3 fs-13 pt-2"
@@ -96,6 +109,19 @@ const Find = (props) => {
                         )}`,
                       }}
                     />
+                    {episode.free === false ? (
+                      <div
+                        className="description mt-2"
+                        onClick={() => setModal(true)}
+                      >
+                        <span className="d-flex ml-2">
+                          <span className="material-icons mr-2">
+                            assignment
+                          </span>
+                          Submission
+                        </span>
+                      </div>
+                    ) : null}
                   </>
                 )}
               </div>
@@ -131,7 +157,17 @@ const Find = (props) => {
           <div className="pl-3 pr-3 col-12 d-none d-lg-block fs-13">
             {episode.msg ? null : (
               <>
-                <h6 className="pb-2">{episode.name}</h6>
+                <div className="d-flex pb-2 justify-content-between">
+                  <h6 className="mb-0">{episode.name}</h6>
+                  {episode.free === false ? (
+                    <div className="submission" onClick={() => setModal(true)}>
+                      <span className="d-flex">
+                        <span className="material-icons mr-2">assignment</span>
+                        Submission
+                      </span>
+                    </div>
+                  ) : null}
+                </div>
                 <span
                   dangerouslySetInnerHTML={{
                     __html: `${linkify(
@@ -146,6 +182,68 @@ const Find = (props) => {
       ) : (
         <p className="text-center p-5 w-100">Loading.</p>
       )}
+      <Modal isOpen={modal} centered className="submission-modal">
+        <ModalHeader toggle={toggle_modal} disabled={disabled}></ModalHeader>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            const { current } = submissionFile;
+            var FileSize = current.files[0].size / 1024 / 1024;
+            if (FileSize > 25) {
+              setError({ file: "Submission file must be under 25mb" });
+            } else {
+              disable(true);
+              const upload = new FormData();
+              upload.append("file", current.files[0]);
+              upload.append(
+                "description",
+                submission.description ? submission.description : ""
+              );
+              upload.append("episode_id", props.match.params.episode);
+              axios({
+                method: "post",
+                url: `/api/submission/${submission._id ? "update" : "create"}`,
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+                data: upload,
+              }).then((response) => {
+                if (response.data.status) window.location.reload();
+                else {
+                  let errors = response.data.errors;
+                  errors.map((error) => setError({ [error.param]: error.msg }));
+                  disable(false);
+                }
+                disable(false);
+              });
+            }
+          }}
+        >
+          <FormGroup>
+            <Label>Submission file</Label>
+            <input
+              type="file"
+              name="file"
+              ref={submissionFile}
+              required={true}
+              className={`form-control-file ${error.file ? "is-invalid" : ""}`}
+            />
+            <FormFeedback>{error.file}</FormFeedback>
+          </FormGroup>
+          <FormGroup>
+            <Label>Description</Label>
+            <Input
+              type="textarea"
+              onChange={(e) =>
+                setSubmission({ ...submission, description: e.target.value })
+              }
+            />
+          </FormGroup>
+          <Button color="danger" type="submit" disabled={disabled} block>
+            Send
+          </Button>
+        </form>
+      </Modal>
     </div>
   );
 };

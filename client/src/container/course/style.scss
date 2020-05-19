@@ -79,3 +79,42 @@
   align-items: center;
   background: rgba(0, 0, 0, 0.1);
 }
+.submission {
+  font-size: 14px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+.submission-modal {
+  .modal-header {
+    padding: 0;
+    margin-bottom: 10px;
+    border: none;
+    .close {
+      text-shadow: none;
+      font-size: 18px;
+      &:hover,
+      &:focus {
+        outline: none;
+      }
+      span {
+        color: white;
+      }
+    }
+  }
+  .modal-content {
+    background: black;
+    color: white;
+    padding: 10px;
+    textarea.form-control {
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      color: white;
+    }
+  }
+}

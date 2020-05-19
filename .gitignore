@@ -1,4 +1,4 @@
 /node_modules
 .env
 yarn.lock
-google-service.json
+google-storage.json

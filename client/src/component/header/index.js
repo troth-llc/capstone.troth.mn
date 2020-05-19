@@ -29,7 +29,12 @@ const Header = () => {
           <div className="brand-text">Capstone</div>
         </Link>
         <div className="header-action d-flex">
-          <Link className="nav_link" to="/course">
+          <Link
+            className="nav_link"
+            to="/course"
+            className="mr-3"
+            style={{ lineHeight: "36px" }}
+          >
             Сургалтууд
           </Link>
           {user ? (

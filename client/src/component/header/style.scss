@@ -57,6 +57,8 @@
     width: 40px;
   }
   .header-action {
+    justify-content: center;
+    text-align: center;
     .nav_link {
       line-height: 36px;
       margin-left: 10px;
@@ -65,9 +67,13 @@
       color: #fff;
       margin-left: 18px;
       vertical-align: middle;
+      @media (max-width: 1024px) {
+        display: none;
+      }
     }
-    @media (max-width: 1024px) {
-      display: none;
+    .member-button {
+      margin: 0;
+      display: block;
     }
   }
 }
@@ -104,9 +110,13 @@
 .drawer-trigger {
   display: none;
   @media (max-width: 1024px) {
-    display: block;
+    display: flex;
+    height: 40px;
+    width: 40px;
+    justify-content: flex-end;
   }
   button {
+    padding: 0;
     background: transparent;
     outline: none;
     color: #fff;
@@ -186,7 +196,8 @@
 }
 .dropdown-header {
   hr {
-    margin: 0;
+    margin-top: 0;
+    margin-bottom: 10px;
     border: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
