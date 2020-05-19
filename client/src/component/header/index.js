@@ -54,7 +54,9 @@ const Header = () => {
                   <p className="dropdown-name">{user.name}</p>
                   <p className="dropdown-type">{user.type}</p>
                   <hr />
-                  <Link to="/submissions">Submissions</Link>
+                  <Link to="/submissions" style={{ display: "block" }}>
+                    Submissions
+                  </Link>
                 </div>
               </DropdownMenu>
             </Dropdown>

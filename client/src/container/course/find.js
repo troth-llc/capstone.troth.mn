@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import {
@@ -11,7 +11,9 @@ import {
   ModalHeader,
   FormFeedback,
 } from "reactstrap";
+import { User } from "context/user";
 const Find = (props) => {
+  const { user } = useContext(User);
   const [state, setState] = useState(null);
   const [episode, setEpisode] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -112,7 +114,14 @@ const Find = (props) => {
                     {episode.free === false ? (
                       <div
                         className="description mt-2"
-                        onClick={() => setModal(true)}
+                        onClick={() => {
+                          var current = user.submissions.find(
+                            (submission) =>
+                              submission.episode._id ===
+                              props.match.params.episode
+                          );
+                          if (!current) setModal(true);
+                        }}
                       >
                         <span className="d-flex ml-2">
                           <span className="material-icons mr-2">
@@ -155,12 +164,22 @@ const Find = (props) => {
             </div>
           </div>
           <div className="pl-3 pr-3 col-12 d-none d-lg-block fs-13">
-            {episode.msg ? null : (
+            {episode.msg && user ? null : (
               <>
                 <div className="d-flex pb-2 justify-content-between">
                   <h6 className="mb-0">{episode.name}</h6>
                   {episode.free === false ? (
-                    <div className="submission" onClick={() => setModal(true)}>
+                    <div
+                      className="submission"
+                      onClick={() => {
+                        var current = user.submissions.find(
+                          (submission) =>
+                            submission.episode._id ===
+                            props.match.params.episode
+                        );
+                        if (!current) setModal(true);
+                      }}
+                    >
                       <span className="d-flex">
                         <span className="material-icons mr-2">assignment</span>
                         Submission

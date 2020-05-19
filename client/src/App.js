@@ -4,11 +4,23 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import { Header, Footer } from "component";
-import { Home, Course, Find } from "container";
+import { Home, Course, Find, Submission } from "container";
 import { User } from "context/user";
 const App = () => {
   const [cookie, , removeCookie] = useCookies("token");
   const [user, setUser] = useState(null);
+  const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={(props) =>
+        cookie.token ? (
+          <Component {...props} />
+        ) : (
+          (window.location.href = "https://troth.mn/auth/register")
+        )
+      }
+    />
+  );
   const login = () => {
     if (cookie.token) {
       axios
@@ -43,6 +55,7 @@ const App = () => {
             <Route exact path="/" component={Home} />
             <Route exact path="/course" component={Course} />
             <Route path="/course/:id/:episode" component={Find} />
+            <PrivateRoute exact path="/submissions" component={Submission} />
           </Switch>
         </div>
         <Footer />
