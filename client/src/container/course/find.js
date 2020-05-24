@@ -187,13 +187,15 @@ const Find = (props) => {
                     </div>
                   ) : null}
                 </div>
-                <span
-                  dangerouslySetInnerHTML={{
-                    __html: `${linkify(
-                      episode.description.replace(/\n|\r\n|\r/g, "<br>")
-                    )}`,
-                  }}
-                ></span>
+                {episode.description ? (
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: `${linkify(
+                        episode.description.replace(/\n|\r\n|\r/g, "<br>")
+                      )}`,
+                    }}
+                  ></span>
+                ) : null}
               </>
             )}
           </div>

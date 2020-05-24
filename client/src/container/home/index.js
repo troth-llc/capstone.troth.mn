@@ -19,7 +19,7 @@ const Home = () => {
     controls: false,
     sources: [
       {
-        src: require("assets/video/hero.mp4"),
+        src: "https://cdn.troth.mn/media/hero.mp4",
         type: "video/mp4",
       },
     ],
@@ -87,15 +87,13 @@ const Home = () => {
                   >
                     close
                   </button>
-                  <h2 className="mc-text-h2">
-                    Learn from the world’s best tech
-                  </h2>
+                  <h2 className="mc-text-h2">Learn from the world’s best *</h2>
                   <div className="mc-mt-8 mc-mb-4">
                     <h4 className="mc-text-h4 mc-mb-1">
-                      Unlimited access to all 10 instructors.
+                      Unlimited access to all ∞ instructors.
                     </h4>
                     <p className="mc-opacity--muted">
-                      access to all courses for $200
+                      access to all courses for $$$
                     </p>
                   </div>
                   <div className="hero-action pt-3">

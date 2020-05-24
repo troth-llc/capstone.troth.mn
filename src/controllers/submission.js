@@ -29,7 +29,7 @@ exports.create = (req, res) => {
       console.log(err);
     });
     blobStream.on("finish", async () => {
-      const file = `http://cdn.troth.mn/${blob.name}`;
+      const file = `https://cdn.troth.mn/${blob.name}`;
       User.findById(id)
         .populate("submissions", "episode")
         .exec((err, user) => {

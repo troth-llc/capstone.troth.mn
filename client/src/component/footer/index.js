@@ -51,6 +51,13 @@ const Footer = () => {
           >
             twitter
           </a>
+          <a
+            href="https://discord.gg/HaQC5r3"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            discord
+          </a>
           <Link to="/privacy">Privacy Policy</Link>
           <Link to="/terms">Terms and Conditions</Link>
         </div>
