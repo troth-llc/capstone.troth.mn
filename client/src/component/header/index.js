@@ -45,7 +45,18 @@ const Header = () => {
                 aria-expanded={dropdownOpen}
               >
                 <div className="profile-header nav_link d-flex">
-                  <div className="avatar"></div>
+                  <div className="avatar">
+                    {user.avatar ? (
+                      <div
+                        className="avatar-container"
+                        style={{ backgroundImage: `url(${user.avatar})` }}
+                      />
+                    ) : (
+                      <div className="avatar-preview">
+                        {user.username.charAt(0).toUpperCase()}
+                      </div>
+                    )}
+                  </div>
                   <div className="profile-username">{user.username}</div>
                 </div>
               </DropdownToggle>
@@ -63,7 +74,7 @@ const Header = () => {
           ) : (
             <a
               className="btn btn-danger member-button"
-              href="https://troth.mn/auth/register"
+              href="https://troth.mn/auth"
               target="_blank"
               rel="noopener noreferrer"
             >

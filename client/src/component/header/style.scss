@@ -164,11 +164,23 @@
   display: flex;
   cursor: pointer;
   .avatar {
-    height: 36px;
-    width: 36px;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.3);
     margin-right: 10px;
+    .avatar-container {
+      background-position: 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      cursor: pointer;
+      height: 36px;
+      width: 36px;
+      border-radius: 50%;
+    }
+    .avatar-preview {
+      height: 36px;
+      width: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      line-height: 36px;
+    }
   }
 }
 @media (max-width: 1024px) {

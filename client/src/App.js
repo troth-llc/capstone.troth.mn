@@ -1,19 +1,20 @@
 import React, { useState, useEffect, useMemo } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useCookies } from "react-cookie";
+import Cookies from "js-cookie";
 import axios from "axios";
 import { Header, Footer } from "component";
 import { Home, Course, Find, Submission } from "container";
 import { User } from "context/user";
+var dev = !process.env.NODE_ENV || process.env.NODE_ENV === "development";
 const App = () => {
-  const [cookie, , removeCookie] = useCookies("token");
+  const cookie = Cookies.get("token");
   const [user, setUser] = useState(null);
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
       {...rest}
       render={(props) =>
-        cookie.token ? (
+        cookie ? (
           <Component {...props} />
         ) : (
           (window.location.href = "https://troth.mn/auth/register")
@@ -22,20 +23,28 @@ const App = () => {
     />
   );
   const login = () => {
-    if (cookie.token) {
+    if (cookie) {
       axios
         .get("/api/user")
         .then((response) => {
           const { user, msg } = response.data;
           if (user === null || msg) {
-            removeCookie("token");
+            Cookies.remove("token", {
+              path: "/",
+              domain: `${dev ? window.location.hostname : ".troth.mn"}`,
+              secure: dev ? false : true,
+            });
             document.location.reload();
           }
           setUser(user);
         })
         .catch((error) => {
           if (error) {
-            removeCookie("token");
+            Cookies.remove("token", {
+              path: "/",
+              domain: `${dev ? window.location.hostname : ".troth.mn"}`,
+              secure: dev ? false : true,
+            });
             document.location.reload();
           }
         });

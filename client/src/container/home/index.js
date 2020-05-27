@@ -56,7 +56,7 @@ const Home = () => {
       setScroll({ opacity: 1 - top / 1000, transform: 1 - top / 8000 });
     };
   }, [scroll, hero]);
-  useEffect(() => { }, [course, intro]);
+  useEffect(() => {}, [course, intro]);
   return (
     <>
       <div
@@ -73,7 +73,7 @@ const Home = () => {
               <div
                 className={`hero__card hp-pane d-${
                   play ? "none" : "flex"
-                  } align-items-center`}
+                } align-items-center`}
               >
                 <div className="hero__card-content mc-p-9">
                   <button
@@ -97,9 +97,9 @@ const Home = () => {
                     </p>
                   </div>
                   <div className="hero-action pt-3">
-                    <Button color="danger" className="member-button">
+                    <a color="danger" className="member-button">
                       Become a member
-                    </Button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -126,7 +126,7 @@ const Home = () => {
                     <li
                       className={`class-catalog__nav-item mc-mb-6 ${
                         c.active ? "class-catalog__nav-item--active" : null
-                        }`}
+                      }`}
                       key={c._id}
                       onClick={() => {
                         var selected = course.map((c) => {
@@ -174,7 +174,7 @@ const Home = () => {
                         <Link
                           to={`/course/${course.find((c) => c.active)._id}/${
                             episode._id
-                            }`}
+                          }`}
                         >
                           <div className="mc-tile mc-tile--16x9">
                             <div className="mc-tile__content content">
@@ -207,8 +207,8 @@ const Home = () => {
               </div>
             </>
           ) : (
-              <p className="text-center">Loading...</p>
-            )}
+            <p className="text-center">Loading...</p>
+          )}
         </div>
         <div className="container mb-5">
           <div className="text-center">
@@ -235,16 +235,16 @@ const Home = () => {
                             ></iframe>
                           </div>
                         ) : (
-                            <div className="player-full">
-                              <iframe
-                                src={intro.find((i) => i.active).video}
-                                title="vimeo"
-                                frameBorder="0"
-                                allow="autoplay; fullscreen"
-                                allowFullScreen
-                              ></iframe>
-                            </div>
-                          )
+                          <div className="player-full">
+                            <iframe
+                              src={intro.find((i) => i.active).video}
+                              title="vimeo"
+                              frameBorder="0"
+                              allow="autoplay; fullscreen"
+                              allowFullScreen
+                            ></iframe>
+                          </div>
+                        )
                       ) : null}
                     </div>
                   </div>
@@ -253,35 +253,35 @@ const Home = () => {
               <div className="col-12 col-lg-auto pl-0 ml-clear">
                 {intro
                   ? intro.map((int, index) => {
-                    return (
-                      <div
-                        className={`category-trigger${
-                          int.active ? " active" : ""
+                      return (
+                        <div
+                          className={`category-trigger${
+                            int.active ? " active" : ""
                           }`}
-                        key={index}
-                        onClick={() => {
-                          var selected = intro.map((c) => {
-                            c.active = false;
-                            return c;
-                          });
-                          selected[index].active = true;
-                          setIntro([...selected]);
-                        }}
-                      >
-                        <div className="d-flex justify-content-between align-items-center">
-                          <h6 className="mb-0 mr-5">
-                            <span className="material-icons">
-                              {int.active ? "pause" : "play_arrow"}
-                            </span>
-                            {int.name}
-                          </h6>
-                          <p className="mc-opacity--muted mc-text-small mb-0">
-                            {int.duration}
-                          </p>
+                          key={index}
+                          onClick={() => {
+                            var selected = intro.map((c) => {
+                              c.active = false;
+                              return c;
+                            });
+                            selected[index].active = true;
+                            setIntro([...selected]);
+                          }}
+                        >
+                          <div className="d-flex justify-content-between align-items-center">
+                            <h6 className="mb-0 mr-5">
+                              <span className="material-icons">
+                                {int.active ? "pause" : "play_arrow"}
+                              </span>
+                              {int.name}
+                            </h6>
+                            <p className="mc-opacity--muted mc-text-small mb-0">
+                              {int.duration}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })
+                      );
+                    })
                   : null}
               </div>
             </div>
