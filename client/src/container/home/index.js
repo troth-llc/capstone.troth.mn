@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { VideoPlayer } from "component";
 import { Button } from "reactstrap";
 import "./style.scss";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { User } from "context/user";
 const Home = () => {
+  const { user } = useContext(User);
   const [scroll, setScroll] = useState({ opacity: 1, transform: 1 });
   const [play, setPlay] = useState(false);
   const isYoutube = (url) => {
@@ -229,29 +231,46 @@ const Home = () => {
                 <div className="p-3">
                   <div className="bc-player">
                     <div className="bc-player__wrapper">
-                      {intro && intro.length > 0 ? (
-                        isYoutube(intro.find((i) => i.active).video) ? (
-                          <div className="player-full">
-                            <iframe
-                              src={intro.find((i) => i.active).video}
-                              frameBorder="0"
-                              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                              allowFullScreen
-                              title="youtube player"
-                            ></iframe>
-                          </div>
-                        ) : (
-                          <div className="player-full">
-                            <iframe
-                              src={intro.find((i) => i.active).video}
-                              title="vimeo"
-                              frameBorder="0"
-                              allow="autoplay; fullscreen"
-                              allowFullScreen
-                            ></iframe>
-                          </div>
-                        )
-                      ) : null}
+                      {user ? (
+                        intro && intro.length > 0 ? (
+                          isYoutube(intro.find((i) => i.active).video) ? (
+                            <div className="player-full">
+                              <iframe
+                                src={intro.find((i) => i.active).video}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                                title="youtube player"
+                              ></iframe>
+                            </div>
+                          ) : (
+                            <div className="player-full">
+                              <iframe
+                                src={intro.find((i) => i.active).video}
+                                title="vimeo"
+                                frameBorder="0"
+                                allow="autoplay; fullscreen"
+                                allowFullScreen
+                              ></iframe>
+                            </div>
+                          )
+                        ) : null
+                      ) : (
+                        <div className="premium-video flex-column">
+                          <h6 className="text-center mb-0">
+                            Та нэвтэрч орсны дараа үзэх боломжтой.
+                          </h6>
+                          <br />
+                          <a
+                            className="btn btn-danger member-button"
+                            href="https://troth.mn/auth"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Нэвтрэх
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

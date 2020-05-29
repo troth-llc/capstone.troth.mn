@@ -55,36 +55,53 @@ const Find = (props) => {
               <div className="p-3">
                 <div className="bc-player">
                   <div className="bc-player__wrapper">
-                    {episode.msg ? (
-                      <div className="premium-video">
+                    {user ? (
+                      episode.msg ? (
+                        <div className="premium-video">
+                          <a
+                            className="btn btn-danger member-button"
+                            href="https://troth.mn/capstone/premium"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Become a member
+                          </a>
+                        </div>
+                      ) : isYoutube(episode.video) ? (
+                        <div className="player-full">
+                          <iframe
+                            src={episode.video}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            title="youtube player"
+                          ></iframe>
+                        </div>
+                      ) : (
+                        <div className="player-full">
+                          <iframe
+                            src={episode.video}
+                            title="vimeo"
+                            frameBorder="0"
+                            allow="autoplay; fullscreen"
+                            allowFullScreen
+                          ></iframe>
+                        </div>
+                      )
+                    ) : (
+                      <div className="premium-video flex-column">
+                        <h6 className="text-center mb-0">
+                          Та нэвтэрч орсны дараа үзэх боломжтой.
+                        </h6>
+                        <br />
                         <a
                           className="btn btn-danger member-button"
-                          href="https://troth.mn/capstone/premium"
+                          href="https://troth.mn/auth"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          Become a member
+                          Нэвтрэх
                         </a>
-                      </div>
-                    ) : isYoutube(episode.video) ? (
-                      <div className="player-full">
-                        <iframe
-                          src={episode.video}
-                          frameBorder="0"
-                          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                          allowFullScreen
-                          title="youtube player"
-                        ></iframe>
-                      </div>
-                    ) : (
-                      <div className="player-full">
-                        <iframe
-                          src={episode.video}
-                          title="vimeo"
-                          frameBorder="0"
-                          allow="autoplay; fullscreen"
-                          allowFullScreen
-                        ></iframe>
                       </div>
                     )}
                   </div>

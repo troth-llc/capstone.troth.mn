@@ -18,10 +18,12 @@ const Footer = () => {
             </div>
             <div className="col-md-10 col-xs-6">
               <p className="footer-description pt-2">
-                Трот нь хөрөнгө оруулалтын олон төрлийн тусламжтайгаар жижиг
-                дунд үйлдвэрлэл, тек-дизайн болон артистуудыг дэлхийн зах зээлд
-                гаргах зорилготой төсөл дэмжих байгууллага юм. Уг хичээлүүдээрээ
-                дамжуулан таныг санаагаа бодит болгоход тань тусална.
+                Copyright &copy; {new Date().getFullYear()} TROTH LLC. All
+                rights reserved. <br />
+                All materials contained on this web site are protected by TROTH
+                LLC copyright and may not be reproduced, distributed,
+                transmited, displayed, published or broadcast without the prior
+                permission of TROTH LLC.
               </p>
             </div>
           </div>
