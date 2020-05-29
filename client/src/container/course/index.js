@@ -5,14 +5,14 @@ import "./style.scss";
 const Course = () => {
   const [state, setState] = useState(null);
   const get = () => {
-    axios.get("/api/course").then((res) => setState(res.data.result));
+    axios.get("/api/course/get").then((res) => setState(res.data.result));
   };
   useEffect(() => {
     get();
   }, []);
   return (
     <div className="course container">
-      <h5 className="pt-5 pb-4">Our Courses</h5>
+      <h5 className="pt-5 pb-4">Бидний сургалтууд</h5>
       <div className="row sample-course">
         {state ? (
           state.map((course) => {

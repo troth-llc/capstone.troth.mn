@@ -20,6 +20,19 @@ exports.index = (req, res) => {
       res.json({ result });
     });
 };
+exports.get = (req, res) => {
+  Course.find()
+    .select("name description episode cover")
+    .populate("category", "name")
+    .populate({
+      path: "episode",
+      select: "name cover duration",
+    })
+    .exec((err, result) => {
+      if (err) console.log(err);
+      res.json({ result });
+    });
+};
 exports.find = (req, res) => {
   const { id, episode } = req.params;
   if (id && episode) {

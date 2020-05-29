@@ -10,7 +10,7 @@ const Footer = () => {
             <div className="col-md-2 col-xs-6  d-flex justify-content-center">
               <Link to="/">
                 <img
-                  src={require("assets/image/logo.png")}
+                  src={require("assets/image/logo-white.png")}
                   alt="logo"
                   height="100"
                 />
@@ -18,13 +18,10 @@ const Footer = () => {
             </div>
             <div className="col-md-10 col-xs-6">
               <p className="footer-description pt-2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Трот нь хөрөнгө оруулалтын олон төрлийн тусламжтайгаар жижиг
+                дунд үйлдвэрлэл, тек-дизайн болон артистуудыг дэлхийн зах зээлд
+                гаргах зорилготой төсөл дэмжих байгууллага юм. Уг хичээлүүдээрээ
+                дамжуулан таныг санаагаа бодит болгоход тань тусална.
               </p>
             </div>
           </div>

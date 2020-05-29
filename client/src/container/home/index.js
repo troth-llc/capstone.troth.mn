@@ -97,7 +97,13 @@ const Home = () => {
                     </p>
                   </div>
                   <div className="hero-action pt-3">
-                    <a color="danger" className="member-button">
+                    <a
+                      color="danger"
+                      className="member-button btn-danger btn-link btn"
+                      href="https://troth.mn/capstone/premium"
+                      target="_blank"
+                      rel="noopener"
+                    >
                       Become a member
                     </a>
                   </div>
@@ -117,7 +123,7 @@ const Home = () => {
       </div>
       <div>
         <div className="container">
-          <h1 className="mc-m-9 text-center mc-text-h2">Explore our courses</h1>
+          <h1 className="mc-m-9 text-center mc-text-h2">Бидний сургалтууд</h1>
           {course && course.length > 0 ? (
             <>
               <ol className="d-none d-md-block class-catalog__nav mc-text-small mc-mt-4 p-0 text-center">
@@ -212,9 +218,9 @@ const Home = () => {
         </div>
         <div className="container mb-5">
           <div className="text-center">
-            <h1 className="mc-m-9 mc-text-h2 mb-0">Course Introductions</h1>
+            <h1 className="mc-m-9 mc-text-h2 mb-0">Сургалтын танилцуулга</h1>
             <p className="mc-opacity--muted mb-4">
-              (Explained in under 5 minutes)
+              {/* (Тухайн хичээлийн ерөнхий агуулга тайлбар бичлэг) */}
             </p>
           </div>
           <div className="category-showcase-container">
