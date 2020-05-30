@@ -74,9 +74,9 @@ const Header = () => {
           ) : (
             <a
               className="btn btn-danger member-button"
-              href="https://troth.mn/auth"
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`https://troth.mn/auth?next=${encodeURI(
+                "https://capstone.troth.mn"
+              )}`}
             >
               Нэвтрэх
             </a>

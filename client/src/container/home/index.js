@@ -263,7 +263,9 @@ const Home = () => {
                           <br />
                           <a
                             className="btn btn-danger member-button"
-                            href="https://troth.mn/auth"
+                            href={`https://troth.mn/auth?next=${encodeURI(
+                              "https://capstone.troth.mn"
+                            )}`}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
