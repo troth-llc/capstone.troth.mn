@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import { VideoPlayer } from "component";
-import { Button } from "reactstrap";
 import "./style.scss";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -89,25 +88,40 @@ const Home = () => {
                   >
                     close
                   </button>
-                  <h2 className="mc-text-h2">Learn from the world’s best *</h2>
+                  <h2 className="mc-text-h2">Мөрөөдлийн төслөө бодит болгоё</h2>
                   <div className="mc-mt-8 mc-mb-4">
-                    <h4 className="mc-text-h4 mc-mb-1">
-                      Unlimited access to all ∞ instructors.
-                    </h4>
+                    <h4 className="mc-text-h4 mc-mb-1"></h4>
                     <p className="mc-opacity--muted">
-                      access to all courses for $$$
+                      Премиум гишүүнд нэгдэж манай платформ дээр нэмэгдэх бүх
+                      сургалтыг үнэгүй үзээрэй.
                     </p>
                   </div>
                   <div className="hero-action pt-3">
-                    <a
-                      color="danger"
-                      className="member-button btn-danger btn-link btn"
-                      href="https://troth.mn/capstone/premium"
-                      target="_blank"
-                      rel="noopener"
-                    >
-                      Become a member
-                    </a>
+                    {user ? (
+                      user.type === "premium" ? (
+                        <Link to="/course">Сургалтууд</Link>
+                      ) : (
+                        <a
+                          color="danger"
+                          className="member-button btn-danger btn-link btn"
+                          href="https://troth.mn/capstone/premium"
+                          target="_blank"
+                          rel="noopener"
+                        >
+                          Премиум гишүүн болох
+                        </a>
+                      )
+                    ) : (
+                      <a
+                        color="danger"
+                        className="member-button btn-danger btn-link btn"
+                        href="https://troth.mn/capstone/premium"
+                        target="_blank"
+                        rel="noopener"
+                      >
+                        Премиум гишүүн болох
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
@@ -266,8 +280,6 @@ const Home = () => {
                             href={`https://troth.mn/auth?next=${encodeURI(
                               "https://capstone.troth.mn"
                             )}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
                           >
                             Нэвтрэх
                           </a>

@@ -164,12 +164,30 @@ const Find = (props) => {
                     }`}
                     key={episode._id}
                   >
-                    <div className="d-flex justify-content-between align-items-center">
+                    <div
+                      className={`d-flex justify-content-between align-items-center ${
+                        user
+                          ? index !== 0 && user.type !== "premium"
+                            ? "text-muted"
+                            : ""
+                          : index !== 0
+                          ? "text-muted"
+                          : ""
+                      }`}
+                    >
                       <h6 className="mb-0 mr-5">
                         <span className="material-icons">
-                          {episode._id === props.match.params.episode
+                          {user
+                            ? episode._id === props.match.params.episode
+                              ? "pause"
+                              : index === 0 || user.type === "premium"
+                              ? "play_arrow"
+                              : "lock"
+                            : episode._id === props.match.params.episode
                             ? "pause"
-                            : "play_arrow"}
+                            : index === 0
+                            ? "play_arrow"
+                            : "lock"}
                         </span>
                         {index + 1 + ". " + episode.name}
                       </h6>
@@ -201,7 +219,7 @@ const Find = (props) => {
                     >
                       <span className="d-flex">
                         <span className="material-icons mr-2">assignment</span>
-                        Submission
+                        Даалгавар илгээх
                       </span>
                     </div>
                   ) : null}
@@ -260,7 +278,7 @@ const Find = (props) => {
           }}
         >
           <FormGroup>
-            <Label>Submission file</Label>
+            <Label>Даалгаврын файл</Label>
             <input
               type="file"
               name="file"
@@ -271,7 +289,7 @@ const Find = (props) => {
             <FormFeedback>{error.file}</FormFeedback>
           </FormGroup>
           <FormGroup>
-            <Label>Description</Label>
+            <Label>Нэмэлт тайлбар</Label>
             <Input
               type="textarea"
               onChange={(e) =>
