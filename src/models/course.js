@@ -22,11 +22,11 @@ const courseSchema = new Schema({
   episode: [{ type: Schema.Types.ObjectId, ref: "episode" }],
   updated: {
     type: Date,
-    default: new Date(),
+    default: Date.now,
   },
   created: {
     type: Date,
-    default: new Date(),
+    default: Date.now,
   },
 });
 const course = mongoose.model("course", courseSchema);
