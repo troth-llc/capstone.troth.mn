@@ -41,7 +41,7 @@ exports.find = (req, res) => {
       .populate("category", "name")
       .populate({
         path: "episode",
-        select: "name cover duration",
+        select: "name cover duration free",
       })
       .exec((err, result) => {
         if (err) res.json({ status: false });

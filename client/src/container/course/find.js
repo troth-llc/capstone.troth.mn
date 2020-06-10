@@ -167,7 +167,9 @@ const Find = (props) => {
                     <div
                       className={`d-flex justify-content-between align-items-center ${
                         user
-                          ? index !== 0 && user.type !== "premium"
+                          ? index !== 0 &&
+                            user.type !== "premium" &&
+                            episode.free === false
                             ? "text-muted"
                             : ""
                           : index !== 0
@@ -180,12 +182,14 @@ const Find = (props) => {
                           {user
                             ? episode._id === props.match.params.episode
                               ? "pause"
-                              : index === 0 || user.type === "premium"
+                              : index === 0 ||
+                                user.type === "premium" ||
+                                episode.free === true
                               ? "play_arrow"
                               : "lock"
                             : episode._id === props.match.params.episode
                             ? "pause"
-                            : index === 0
+                            : index === 0 || episode.free === true
                             ? "play_arrow"
                             : "lock"}
                         </span>
