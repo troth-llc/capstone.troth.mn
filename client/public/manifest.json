@@ -1,7 +1,7 @@
 {
   "background_color": "#000000",
   "description": "Мөрөөдлийн төслөө бодит болгоё",
-  "display": "fullscreen",
+  "display": "standalone",
   "icons": [
     {
       "src": "https://cdn.troth.mn/img/icon-default-192.png",
@@ -27,6 +27,30 @@
     }
   ],
   "name": "Capstone",
+  "shortcuts": [
+    {
+      "name": "Сургалтууд",
+      "url": "/course",
+      "icons": [
+        {
+          "src": "https://cdn.troth.mn/img/book_black.png",
+          "type": "image/png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Submissions",
+      "url": "/submissions",
+      "icons": [
+        {
+          "src": "https://cdn.troth.mn/img/assignment_black.png",
+          "type": "image/png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
   "short_name": "Capstone",
   "start_url": "/?utm_source=homescreen",
   "theme_color": "#000000",

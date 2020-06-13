@@ -2,12 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Drawer from "@material/react-drawer";
 import { User } from "context/user";
-import {
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-} from "reactstrap";
+import { Dropdown, DropdownToggle, DropdownMenu } from "reactstrap";
 import "./style.scss";
 const Header = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);

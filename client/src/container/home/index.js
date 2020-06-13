@@ -10,9 +10,9 @@ const Home = () => {
   const [play, setPlay] = useState(false);
   const isYoutube = (url) => {
     var match = url.match(
-      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/
+      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|v=|\?v=)([^#]*).*/
     );
-    return match && match[2].length == 11 ? match[2] : false;
+    return match && match[2].length === 11 ? match[2] : false;
   };
   const hero = {
     autoplay: true,
@@ -90,7 +90,7 @@ const Home = () => {
                   </button>
                   <h2 className="mc-text-h2">Мөрөөдлийн төслөө бодит болгоё</h2>
                   <div className="mc-mt-8 mc-mb-4">
-                    <h4 className="mc-text-h4 mc-mb-1"></h4>
+                    {/* <h4 className="mc-text-h4 mc-mb-1"></h4> */}
                     <p className="mc-opacity--muted">
                       Премиум гишүүнд нэгдэж манай платформ дээр нэмэгдэх бүх
                       сургалтыг үнэгүй үзээрэй.
@@ -106,7 +106,7 @@ const Home = () => {
                           className="member-button btn-danger btn-link btn"
                           href="https://troth.mn/capstone/premium"
                           target="_blank"
-                          rel="noopener"
+                          rel="noopener noreferrer"
                         >
                           Премиум гишүүн болох
                         </a>
@@ -117,7 +117,7 @@ const Home = () => {
                         className="member-button btn-danger btn-link btn"
                         href="https://troth.mn/capstone/premium"
                         target="_blank"
-                        rel="noopener"
+                        rel="noopener noreferrer"
                       >
                         Премиум гишүүн болох
                       </a>

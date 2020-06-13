@@ -24,7 +24,6 @@ const Submission = () => {
                                 src={submission.episode.cover}
                                 alt={submission.episode.name}
                                 className="mc-background__background"
-                                alt="name"
                               />
                             </div>
                           </div>
@@ -39,7 +38,11 @@ const Submission = () => {
                     <div className="d-flex justify-content-between">
                       <div className="submission-details fs-13">
                         <div className="fs-16">{submission.episode.name}</div>
-                        <a href={submission.file} target="_blank">
+                        <a
+                          href={submission.file}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
                           Submission file
                         </a>
                         <div className="submission-description fs-13 d-flex">

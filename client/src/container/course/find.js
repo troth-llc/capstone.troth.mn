@@ -24,26 +24,23 @@ const Find = (props) => {
   const [error, setError] = useState({});
   const toggle = () => setIsOpen(!isOpen);
   const toggle_modal = () => setModal(!modal);
-  const get = () => {
-    axios
-      .get(`/api/course/${props.match.params.id}/${props.match.params.episode}`)
-      .then((res) => {
-        setState(res.data.result);
-        setEpisode(res.data.episode);
-      });
-  };
   const isYoutube = (url) => {
     var match = url.match(
-      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/
+      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|v=|\?v=)([^#]*).*/
     );
-    return match && match[2].length == 11 ? match[2] : false;
+    return match && match[2].length === 11 ? match[2] : false;
   };
   const linkify = (text) => {
     var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
     return text.replace(exp, "<a href='$1'>$1</a>");
   };
   useEffect(() => {
-    get();
+    axios
+      .get(`/api/course/${props.match.params.id}/${props.match.params.episode}`)
+      .then((res) => {
+        setState(res.data.result);
+        setEpisode(res.data.episode);
+      });
   }, [props.match.params.episode]);
   return (
     <div className="course container">
