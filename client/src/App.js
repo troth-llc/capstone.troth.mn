@@ -6,6 +6,7 @@ import axios from "axios";
 import { Header, Footer } from "component";
 import { Home, Course, Find, Submission } from "container";
 import { User } from "context/user";
+import { Offline, Online } from "react-detect-offline";
 var dev = !process.env.NODE_ENV || process.env.NODE_ENV === "development";
 const App = () => {
   const cookie = Cookies.get("token");
@@ -17,7 +18,7 @@ const App = () => {
         cookie ? (
           <Component {...props} />
         ) : (
-          (window.location.href = "https://troth.mn/auth/register")
+          (window.location.href = "https://troth.mn/auth")
         )
       }
     />
@@ -45,7 +46,6 @@ const App = () => {
               domain: `${dev ? window.location.hostname : ".troth.mn"}`,
               secure: dev ? false : true,
             });
-            document.location.reload();
           }
         });
     }
@@ -56,20 +56,36 @@ const App = () => {
   }, []);
   const value = useMemo(() => ({ user, setUser }), [user, setUser]);
   return (
-    <Router>
-      <User.Provider value={value}>
-        <Header />
-        <div className="app">
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/course" component={Course} />
-            <Route path="/course/:id/:episode" component={Find} />
-            <PrivateRoute exact path="/submissions" component={Submission} />
-          </Switch>
+    <>
+      <Offline>
+        <div className="offline">
+          <span className="material-icons-outlined material-icons">
+            cloud_off
+          </span>
+          You're offline right now. Check your connection.
         </div>
-        <Footer />
-      </User.Provider>
-    </Router>
+      </Offline>
+      <Online>
+        <Router>
+          <User.Provider value={value}>
+            <Header />
+            <div className="app">
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/course" component={Course} />
+                <Route path="/course/:id/:episode" component={Find} />
+                <PrivateRoute
+                  exact
+                  path="/submissions"
+                  component={Submission}
+                />
+              </Switch>
+            </div>
+            <Footer />
+          </User.Provider>
+        </Router>
+      </Online>
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
 {
   "background_color": "#000000",
   "description": "Мөрөөдлийн төслөө бодит болгоё",
-  "display": "standalone",
+  "display": "fullscreen",
   "icons": [
     {
       "src": "https://cdn.troth.mn/img/icon-default-192.png",
@@ -28,7 +28,7 @@
   ],
   "name": "Capstone",
   "short_name": "Capstone",
-  "start_url": "https://capstone.troth.mn?utm_source=homescreen&utm_medium=shortcut",
+  "start_url": "/?utm_source=homescreen",
   "theme_color": "#000000",
   "scope": "/"
 }

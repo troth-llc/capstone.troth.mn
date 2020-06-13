@@ -4,7 +4,7 @@ import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@material/react-drawer/dist/drawer.css";
 import App from "./App";
-import * as serviceWorker from "./serviceWorker";
+import * as serviceWorker from "./sw";
 import axios from "axios";
 import Cookies from "js-cookie";
 axios.interceptors.request.use((config) => {
@@ -16,4 +16,4 @@ axios.interceptors.request.use((config) => {
   return config;
 });
 ReactDOM.render(<App />, document.getElementById("capstone"));
-serviceWorker.unregister();
+serviceWorker.register();
