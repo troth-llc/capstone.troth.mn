@@ -99,8 +99,6 @@ const Find = (props) => {
                           href={`https://troth.mn/auth?next=${encodeURI(
                             "https://capstone.troth.mn"
                           )}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
                         >
                           Нэвтрэх
                         </a>
