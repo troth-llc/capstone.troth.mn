@@ -93,7 +93,7 @@ const Find = (props) => {
                         <br />
                         <a
                           className="btn btn-danger member-button"
-                          href={`https://troth.mn/auth?next=${encodeURI(
+                          href={`https://troth.mn/auth?next=${encodeURIComponent(
                             "https://capstone.troth.mn"
                           )}`}
                         >
