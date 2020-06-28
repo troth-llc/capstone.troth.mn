@@ -46,7 +46,7 @@ sudo systemctl status mongod
 
 ```shell
 git clone https://github.com/troth-llc/capstone.troth.mn
-cd troth.mn
+cd capstone.troth.mn
 npm install
 cd client
 npm install
